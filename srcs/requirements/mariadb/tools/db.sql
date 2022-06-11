@@ -1,0 +1,5 @@
+CREATE DATABASE IF NOT EXISTS wordpress;
+CREATE USER IF NOT EXISTS 'minchoi'@'localhost' IDENTIFIED BY 'qwer1234';
+GRANT ALL PRIVILEGES ON wordpress.* TO 'minchoi'@'localhost' WITH GRANT OPTION;
+FLUSH PRIVILEGES;
+ALTER USER 'root'@'localhost' IDENTIFIED BY 'root1234';

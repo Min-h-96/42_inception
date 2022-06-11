@@ -1,14 +1,24 @@
 version:  '3.0'
 
 services:
+  mariadb:
+    container_name: mariadb
+    build: ./requirements/mariadb
+    env_file:
+      - .env
+    volumes:
+      - db:/var/lib/mysql
+    networks:
+      - wpsite
+    restart: unless-stopped
   
   nginx:
     container_name: nginx
     build: ./requirements/nginx
     ports:
       - "443:443"
-    depends_on:
-      - wordpress
+    #depends_on:
+    #  - wordpress
     volumes:
       - wp:/var/www/html
     networks:
@@ -17,6 +27,7 @@ services:
 
 networks:
   wpsite:
+    name: wpsite
     driver: bridge
 
 volumes:

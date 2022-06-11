@@ -1,7 +1,7 @@
 FROM debian:buster
 
 RUN apt-get update
-RUN apt-get install -y nginx openssl
+RUN apt-get install -y nginx openssl php7.3-fpm
 
 EXPOSE 443
 
