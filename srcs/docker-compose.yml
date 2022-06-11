@@ -1,24 +1,19 @@
 version:  '3.0'
 
 services:
-  mariadb:
-    build: ./requirements/mariadb
-  image: mariadb
-  container_name: mariadb
-  expose:
-    - "3306"
-  volumes:
-    - db:/var/lib/mysql
-  environment:
-    - HOST_NAME=${HOST_NAME}
-    - HOST_IPv4=${HOST_IPv4}
-    - MARIADB_HOST=${MARIADB_HOST}
-    - MARIADB_DB=${MARIADB_DB}
-    - MARIADB_USER=${MARIADB_USER}
-    - MARIADB_PWD=${MARIADB_PWD}
-    - MARIADB_ADMIN_USER=${MARIADB_ADMIN_USER}
-    - MARIADB_ADMIN_PWD=${MARIADB_ADMIN_PWD}
-
+  
+  nginx:
+    container_name: nginx
+    build: ./requirements/nginx
+    ports:
+      - "443:443"
+    depends_on:
+      - wordpress
+    volumes:
+      - wp:/var/www/html
+    networks:
+      - wpsite
+    restart: always
 
 networks:
   wpsite:
@@ -27,4 +22,3 @@ networks:
 volumes:
   db:
   wp:
-
