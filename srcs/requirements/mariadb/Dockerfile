@@ -1,13 +1,12 @@
 FROM debian:buster
 
 RUN apt-get update
-RUN apt-get install -y mariadb-server php-mysql php-mbstring php7.3-fpm
-
+RUN apt-get install -y mariadb-server php-mysql php-mbstring
 EXPOSE 3306
 
-COPY ./conf/50-seerver.cnf /etc/mysql/mariadb.conf.d/
+COPY ./conf/50-server.cnf /etc/mysql/mariadb.conf.d/
 COPY ./tools/db.sql /var/www/
 
-RUN service mysql start && mysql < /var/www/db.sql && rm -rf /vqr/www/db.sql
+RUN service mysql start && mysql < /var/www/db.sql && rm -rf /var/www/db.sql
 
 CMD [ "mysqld" ]
